@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>CSS Quiz</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>eCommerce Quiz</h1>
+      <div class="question-title">
+        <div class="question q-active">
+          <h2>Question 1 of 3</h2>
+          <h4>Which of the following is not a real eCommerce platform?</h4>
+        </div>
+        <div class="question">
+          <h2>Question 2 of 3</h2>
+          <h4>If Shopify is so good, why are Shopify developers necessary?</h4>
+        </div>
+        <div class="question">
+          <h2>Question 3 of 3</h2>
+          <h4>Which of the following is true about Shopify developers?</h4>
+        </div>
+      </div>
+      <div class="question-content">
+        <div class="question q-active">
+          <input type="radio" id="shopify" name="q1" value="Shopify" />
+          <label for="shopify">Shopify</label><br />
+          <input
+            type="radio"
+            id="woocommerce"
+            name="q1"
+            value="WooCommerce"
+          />WooCommerce<br />
+          <input
+            type="radio"
+            id="shopcommerce"
+            name="q1"
+            value="ShopCommerce"
+          />ShopCommerce<br />
+          <input
+            type="radio"
+            id="bigcommerce"
+            name="q1"
+            value="BigCommerce"
+          />BigCommerce<br /><br />
+        </div>
+
+        <div class="question">
+          <input
+            type="radio"
+            id="shopify"
+            name="q2"
+            value="To save time on
+          things like store setups and migrations "
+          />To save time on things like store setups and migrations<br />
+          <input
+            type="radio"
+            id="woocommerce"
+            name="q2"
+            value="To extend the
+          limited design options and functionalities of themes with custom code"
+          />To extend the limited design options and functionalities of themes
+          with custom code<br />
+          <input
+            type="radio"
+            id="shopcommerce"
+            name="q2"
+            value="To provide support with a deep understanding of how the platform works and what its limitations are"
+          />To provide support with a deep understanding of how the platform
+          works and what its limitations are<br />
+          <input
+            type="radio"
+            id="bigcommerce"
+            name="q2"
+            value="All the above"
+          />All the above<br />
+        </div>
+      </div>
+      <div class="btn-cntr">
+        <button onclick="fn1()" id="btn1" class="question show-active">
+          Next >
+        </button>
+        <button onclick="fn2()" id="btn2" class="question">Next ></button>
+        <button onclick="fn3()" id="btn3" class="question">Next ></button>
+      </div>
+    </div>
+    <script href="./app.js"></script>
+  </body>
+</html>
