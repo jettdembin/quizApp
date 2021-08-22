@@ -11,11 +11,11 @@
     <div class="container">
       <h1>eCommerce Quiz</h1>
       <div id="question-cntr1" class="q-active">
-        <h2>Question 1 of 3:</h2>
-        <h4>Which of the following is not a real eCommerce platform?</h4>
+        <h2 id="qnumber-1">Question 1 of 3:</h2>
+        <h4 id="question-1">Which of the following is not a real eCommerce platform?</h4>
 
         <div class="question-content">
-          <div class="question">
+          <div class="question-style">
             <input
                 type="radio"
                 id="rd1"
@@ -23,7 +23,7 @@
                 value="Shopify"
             />Shopify</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
                   type="radio"
                   id="rd2"
@@ -31,7 +31,7 @@
                   value="WooCommerce"
             />WooCommerce</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
                 type="radio"
                 id="rd3"
@@ -39,7 +39,7 @@
                 value="ShopCommerce"
           />ShopCommerce</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
                 type="radio"
                 id="rd4"
@@ -51,13 +51,11 @@
       </div>
 
       <div id="question-cntr2" class="hide">
-        <div id="q2">
-          <h2>Question 2 of 3:</h2>
-          <h4>If Shopify is so good, why are Shopify developers necessary?</h4>
-        </div>
+        <h2 id="qnumber-2">Question 2 of 3:</h2>
+        <h4 id="question-2">If Shopify is so good, why are Shopify developers necessary?</h4>
 
         <div class="question-content">
-          <div class="question">
+          <div class="question-style">
             <input
               type="radio"
               id="rd1"
@@ -66,7 +64,7 @@
             things like store setups and migrations "
             />To save time on things like store setups and migrations</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
               type="radio"
               id="rd2"
@@ -76,7 +74,7 @@
             />To extend the limited design options and functionalities of themes
             with custom code</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
               type="radio"
               id="rd3"
@@ -85,7 +83,7 @@
             />To provide support with a deep understanding of how the platform
             works and what its limitations are</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input type="radio" id="rd4" name="q2" value="All the above" />All the
             above</input><br /><br />
           </div>
@@ -93,13 +91,11 @@
       </div>
 
       <div id="question-cntr3" class="hide">
-        <div id="q3">
-          <h2>Question 3 of 3:</h2>
-          <h4>Which of the following is true about Shopify developers?</h4>
-        </div>
+        <h2 id="qnumber-3">Question 3 of 3:</h2>
+        <h4 id="question-3">Which of the following is true about Shopify developers?</h4>
 
         <div class="question-content">
-          <div class="question">
+          <div class="question-style">
             <input
               type="radio"
               id="rd1"
@@ -107,7 +103,7 @@
               value="They are paid extremely well"
             />They are paid extremely well</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
               type="radio"
               id="rd2"
@@ -115,7 +111,7 @@
               value="There is a high demand for them"
             />There is a high demand for them</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input
               type="radio"
               id="rd3"
@@ -124,7 +120,7 @@
             />They need to know web development, the platform itself, and the
             liquid template language</input><br />
           </div>
-          <div class="question">
+          <div class="question-style">
             <input type="radio" id="rd4" name="q3" value="All the above" />All the
             above</input><br />
           </div>
@@ -132,7 +128,7 @@
       </div>
 
       <div class="btn">
-        <button onclick="fn1()" id="q2" class="question q-active button">
+        <button id="next-btn" class="next-btn">
           Next >
         </button>
       <!-- 
@@ -144,4 +140,5 @@
     <script href="./app.js"></script>
   </body>
 </html>
+
 
