@@ -5,11 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
+    <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
     <title>CSS Quiz</title>
   </head>
   <body>
-    <div class="container">
-      <h1>eCommerce Quiz</h1>
+    <div id="container" class="container">
+      <h1 id="heading">eCommerce Quiz</h1>
       <div id="question-cntr1" class="hide q-active">
         <h2 id="qnumber-1">Question 1 of 3:</h2>
         <h4 id="question-1">Which of the following is not a real eCommerce platform?</h4>
@@ -20,7 +24,7 @@
                 type="radio"
                 id="rd1"
                 name="q1"
-                value="Shopify"
+                value="1"
             />Shopify</input><br />
           </div>
           <div class="question-style">
@@ -28,7 +32,7 @@
                   type="radio"
                   id="rd2"
                   name="q1"
-                  value="WooCommerce"
+                  value="2"
             />WooCommerce</input><br />
           </div>
           <div class="question-style">
@@ -36,7 +40,7 @@
                 type="radio"
                 id="rd3"
                 name="q1"
-                value="ShopCommerce"
+                value="3"
           />ShopCommerce</input><br />
           </div>
           <div class="question-style">
@@ -44,7 +48,7 @@
                 type="radio"
                 id="rd4"
                 name="q1"
-                value="BigCommerce"
+                value="4"
           />BigCommerce</input>
           </div>
         </div>
@@ -60,8 +64,7 @@
               type="radio"
               id="rd1"
               name="q2"
-              value="To save time on
-            things like store setups and migrations "
+              value="1"
             />To save time on things like store setups and migrations</input><br />
           </div>
           <div class="question-style">
@@ -69,8 +72,7 @@
               type="radio"
               id="rd2"
               name="q2"
-              value="To extend the
-            limited design options and functionalities of themes with custom code"
+              value="2"
             />To extend the limited design options and functionalities of themes
             with custom code</input><br />
           </div>
@@ -79,13 +81,12 @@
               type="radio"
               id="rd3"
               name="q2"
-              value="To provide support with a deep understanding of how the platform works and what its limitations are"
+              value="3"
             />To provide support with a deep understanding of how the platform
             works and what its limitations are</input><br />
           </div>
           <div class="question-style">
-            <input type="radio" id="rd4" name="q2" value="All the above" />All the
-            above</input><br /><br />
+            <input type="radio" id="rd4" name="q2" value="4" />All the above</input><br />
           </div>
         </div>
       </div>
@@ -100,7 +101,7 @@
               type="radio"
               id="rd1"
               name="q3"
-              value="They are paid extremely well"
+              value="1"
             />They are paid extremely well</input><br />
           </div>
           <div class="question-style">
@@ -108,7 +109,7 @@
               type="radio"
               id="rd2"
               name="q3"
-              value="There is a high demand for them"
+              value="2"
             />There is a high demand for them</input><br />
           </div>
           <div class="question-style">
@@ -116,63 +117,32 @@
               type="radio"
               id="rd3"
               name="q3"
-              value="They need to know web development, the platform itself, and the liquid template language"
+              value="3"
             />They need to know web development, the platform itself, and the
             liquid template language</input><br />
           </div>
           <div class="question-style">
-            <input type="radio" id="rd4" name="q3" value="All the above" />All the
+            <input type="radio" id="rd4" name="q3" value="4" />All the
             above</input><br />
           </div>
         </div>
       </div>
 
       <div class="btn">
-        <button id="btn1" class="hide q-active next-btn">
+        <button id="btn1" class="hide q-active">
           Next >
         </button>
-        <button onclick="fn2()" id="btn2" class="hide next-btn">Next ></button>
-        <button onclick="fn3()" id="btn3" class="hide next-btn">Next ></button>
+        <button id="back-1" class="hide">< Back</button>
+        <button id="btn2" class="hide">Next ></button>
+        <button id="back-2" class="hide">< Back</button>
+        <button id="btn3" class="hide">Next ></button>
       </div>
     </div>
-    <script>
-      var btn1 = document.getElementById('btn1');
-      var btn2 = document.getElementById('btn2');
-      var btn3 = document.getElementById('btn3');
-      var question2 = document.getElementById("question-cntr2");
-      var question3 = document.getElementById("question-cntr3");
-
-      // funciton to remove q-active from all hide classes and set q-active on active quesiton
-      function setNewActive1() {
-        var hiddenQuestions = document.getElementsByClassName('hide');
-        for (var hiddenQuestion of hiddenQuestions) {
-            hiddenQuestion.classList.remove('q-active');
-        }
-        // set q-active on active quesiton
-        question2.classList.add('q-active');
-        btn2.classList.add('q-active');
-      };
-
-      //function onclick for button one to change to next question
-      btn1.addEventListener('click', function() {
-          setNewActive1()
-      });
-
-      function setNewActive2() {
-        var hiddenQuestions = document.getElementsByClassName('hide');
-        for (var hiddenQuestion of hiddenQuestions) {
-            hiddenQuestion.classList.remove('q-active');
-        }
-        // set q-active on active quesiton
-        question3.classList.add('q-active');
-        btn3.classList.add('q-active');
-      };
-
-      //function onclick for button one to change to next question
-      btn2.addEventListener('click', function() {
-          setNewActive2()
-      });
-    </script>
+    <div id="result" class="result">
+      You scored <span id="scored"></span> out of 3
+    </div>  
+    <script src="./questions.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>
 
