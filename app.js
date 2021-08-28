@@ -32,9 +32,17 @@ btn3.addEventListener('click', function() {
 
 back1.addEventListener('click', function() {
     previousQuestion();
+    //reduce question count
+    currentQuestion--;
+    //reduce score count
+    score--;
 });
 back2.addEventListener('click', function() {
     previousQuestion();
+    //reduce question count
+    currentQuestion--;
+    //reduce score count
+    score--;
 });
 
 
@@ -71,6 +79,7 @@ function previousQuestion() {
     }
     if (currentQuestion == 2) {
         question2.classList.add('q-active');
+        back1.classList.add('q-active');
         btn2.classList.add('q-active');
     }
 };
@@ -85,11 +94,12 @@ function setNewActive() {
     if (currentQuestion == 0) {
         question2.classList.add('q-active');
         btn2.classList.add('q-active');
-        //back1.classList.add('q-active');
+        back1.classList.add('q-active');
     }
     if (currentQuestion == 1) {
         question3.classList.add('q-active');
         btn3.classList.add('q-active');
-        //back2.classList.add('q-active');
+        back2.classList.add('q-active');
     }
 };
+
