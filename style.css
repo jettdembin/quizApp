@@ -64,3 +64,16 @@ button {
     margin-top: 2rem;
     cursor: pointer;
 }
+.btn {
+    display: flex;
+}
+
+.result {
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 1em 2em;
+    background-color: white;
+    font-size: 2em;
+    position: absolute;
+    display: none;
+}
