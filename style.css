@@ -12,6 +12,7 @@ html, body {
 
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -45,7 +46,7 @@ h4 {
 }
 
 input[type="radio"] {
-    
+    cursor: pointer;
 }
 
 .question-style {
@@ -54,16 +55,38 @@ input[type="radio"] {
     padding: 1rem;
 }
 
+.question-content {
+    width: 100%;
+    height: 100%;
+}
+
 button {
+    display: block;
     padding: 1rem 2rem;
     border-radius: 0%;
     border: none;
-    background: #4caf50;
     color: white;
     font-size: 1rem;
     margin-top: 2rem;
-    cursor: pointer;
+    margin-right: 1rem;
 }
+
+.back-btn {
+    background: red;
+    opacity: .1;
+    pointer-events: none;
+}
+
+.next-btn {
+    background: red;
+    opacity: .1;
+    pointer-events: none;
+}
+
+.opacity {
+    opacity: 1;
+}
+
 .btn {
     display: flex;
 }
