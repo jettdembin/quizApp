@@ -1,150 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <script
-			  src="https://code.jquery.com/jquery-3.6.0.min.js"
-			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			  crossorigin="anonymous"></script>
-    <title>CSS Quiz</title>
-  </head>
-  <body>
-    <div id="container" class="container">
-      <h1 id="heading">eCommerce Quiz</h1>
-      <div id="question-cntr1" class="hide q-active">
-        <h2 id="qnumber-1">Question 1 of 3:</h2>
-        <h4 id="question-1">Which of the following is not a real eCommerce platform?</h4>
 
-        <div class="question-content">
-          <div class="question-style">
-            <input
-                type="radio"
-                id="rd1"
-                name="q1"
-                value="1"
-            />Shopify</input><br />
-          </div>
-          <div class="question-style">
-            <input
-                  type="radio"
-                  id="rd2"
-                  name="q1"
-                  value="2"
-            />WooCommerce</input><br />
-          </div>
-          <div class="question-style">
-            <input
-                type="radio"
-                id="rd3"
-                name="q1"
-                value="3"
-          />ShopCommerce</input><br />
-          </div>
-          <div class="question-style">
-            <input
-                type="radio"
-                id="rd4"
-                name="q1"
-                value="4"
-          />BigCommerce</input>
-          </div>
-        </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <title>CSS Quiz</title>
+</head>
 
-      <div id="question-cntr2" class="hide">
-        <h2 id="qnumber-2">Question 2 of 3:</h2>
-        <h4 id="question-2">If Shopify is so good, why are Shopify developers necessary?</h4>
+<body>
+  <div id="container" class="container">
+    <h1>eCommerce Quiz</h1>
+    <div class="question-cntr"></div>
+  </div>
 
-        <div class="question-content">
-          <div class="question-style">
-            <input
-              type="radio"
-              id="rd1"
-              name="q2"
-              value="1"
-            />To save time on things like store setups and migrations</input><br />
-          </div>
-          <div class="question-style">
-            <input
-              type="radio"
-              id="rd2"
-              name="q2"
-              value="2"
-            />To extend the limited design options and functionalities of themes
-            with custom code</input><br />
-          </div>
-          <div class="question-style">
-            <input
-              type="radio"
-              id="rd3"
-              name="q2"
-              value="3"
-            />To provide support with a deep understanding of how the platform
-            works and what its limitations are</input><br />
-          </div>
-          <div class="question-style">
-            <input type="radio" id="rd4" name="q2" value="4" />All the above</input><br />
-          </div>
-        </div>
-      </div>
-
-      <div id="question-cntr3" class="hide">
-        <h2 id="qnumber-3">Question 3 of 3:</h2>
-        <h4 id="question-3">Which of the following is true about Shopify developers?</h4>
-
-        <div class="question-content">
-          <div class="question-style">
-            <input
-              type="radio"
-              id="rd1"
-              name="q3"
-              value="1"
-            />They are paid extremely well</input><br />
-          </div>
-          <div class="question-style">
-            <input
-              type="radio"
-              id="rd2"
-              name="q3"
-              value="2"
-            />There is a high demand for them</input><br />
-          </div>
-          <div class="question-style">
-            <input
-              type="radio"
-              id="rd3"
-              name="q3"
-              value="3"
-            />They need to know web development, the platform itself, and the
-            liquid template language</input><br />
-          </div>
-          <div class="question-style">
-            <input type="radio" id="rd4" name="q3" value="4" />All the
-            above</input><br />
-          </div>
-        </div>
-      </div>
-
-      <div class="btn">
-        <button id="btn1" class="hide q-active">
-          Next >
-        </button>
-        <button id="back-1" class="hide">< Back</button>
-        <button id="btn2" class="hide">Next ></button>
-        <button id="back-2" class="hide">< Back</button>
-        <button id="btn3" class="hide">Next ></button>
-      </div>
+    <div class="btn">
+      <button id="back-btn" class="back-btn" onclick="back()">< Back
+      </button>
+      <button id="next-btn" class="next-btn" onclick="next()">Next >
+      </button>
     </div>
-    <div id="result" class="result">
-      You scored <span id="scored"></span> out of 3
-    </div>  
-    <script src="./questions.js"></script>
-    <script src="./app.js"></script>
-  </body>
+  </div>
+  <div id="result" class="result">
+  </div>
+  <script src="./questions.js"></script>
+  <script src="./app.js"></script>
+</body>
+
 </html>
+
 
 
 
