@@ -157,20 +157,20 @@ function createQuestions() {
             
             <div class="question-options">
                 <div class="question-style">
-                    <input type="radio" name="matrix" value="1" onclick="check()">${questions[i].option1}</input><br />
+                    <input type="radio" name="${i}" value="1" onclick="check()">${questions[i].option1}</input><br />
                 </div>
                 <div class="question-style">
-                    <input type="radio" name="matrix" value="2" onclick="check()">${questions[i].option2}</input><br />
+                    <input type="radio" name="${i}" value="2" onclick="check()">${questions[i].option2}</input><br />
                 </div>
                     <div class="question-style">
-                    <input type="radio" name="matrix" value="3" onclick="check()">${questions[i].option3}</input><br />
+                    <input type="radio" name="${i}" value="3" onclick="check()">${questions[i].option3}</input><br />
                 </div>
                 <div class="question-style">
-                    <input type="radio" name="matrix" value="4" onclick="check()">${questions[i].option4}</input>
+                    <input type="radio" name="${i}" value="4" onclick="check()">${questions[i].option4}</input>
                 </div>
             </div> 
         `;
-        questionContent.classList.add("question-content", "hide", `${i}`);
+        questionContent.classList.add("question-content", "hide");
         questionCntr.appendChild(questionContent);
         hiddenQuestionsCounter++
         if (hiddenQuestionsCounter === 1) {
@@ -235,11 +235,11 @@ function back() {
 
 //funciton to check value to allow to contine
 function check() {
+    nextButton.classList.add("active");
     const selectedOption = document.querySelector('input[type=radio]:checked');
     if (selectedOption.value == answerContainer[-1]) {
         score--
     }
-    nextButton.classList.add("active");
 }
 
 
