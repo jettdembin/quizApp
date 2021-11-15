@@ -136,65 +136,72 @@ let answerContainer = [];
 const totalQuestionCount = questions.length;
 let score= 0;
 
+
 //Selecting all containers to input data into
 const questionCntr = document.querySelector(".question-cntr");
 const questionNumber = document.querySelector("#question-number");
 const question = document.querySelector("#question");
 const nextButton = document.querySelector(".next-btn");
 const backButton = document.querySelector(".back-btn");
-const hiddenQuestions = document.querySelectorAll(".hide");
+let hiddenQuestionsCounter = 0;
+let hiddenQuestions = document.querySelectorAll(".hide");
 
 
 //Creating Container for questions and answers to go into
-function showQuestion() {
+function createQuestions() {
     questions.forEach((question, i) => {
         const questionContent = document.createElement('div');
         questionContent.innerHTML = `
-        <h2 id="question-number">Question ${i+ 1} of ${totalQuestionCount}</h2>
-        <h4 id="question">${questions[i].question}</h4>
-        
-        <div class="question-options">
-            <div class="question-style">
-                <input type="radio" name="matrix" value="1" onclick="check()">${questions[i].option1}</input><br />
-            </div>
-            <div class="question-style">
-                <input type="radio" name="matrix" value="2" onclick="check()">${questions[i].option2}</input><br />
-            </div>
+            <h2 id="question-number">Question ${i+ 1} of ${totalQuestionCount}</h2>
+            <h4 id="question">${questions[i].question}</h4>
+            
+            <div class="question-options">
                 <div class="question-style">
-                <input type="radio" name="matrix" value="3" onclick="check()">${questions[i].option3}</input><br />
-            </div>
-            <div class="question-style">
-                <input type="radio" name="matrix" value="4" onclick="check()">${questions[i].option4}</input>
-            </div>
-        </div> 
-    `;
-        questionContent.classList.add("question-content", "hide");
-        if (currentQuestion == i) {
+                    <input type="radio" name="matrix" value="1" onclick="check()">${questions[i].option1}</input><br />
+                </div>
+                <div class="question-style">
+                    <input type="radio" name="matrix" value="2" onclick="check()">${questions[i].option2}</input><br />
+                </div>
+                    <div class="question-style">
+                    <input type="radio" name="matrix" value="3" onclick="check()">${questions[i].option3}</input><br />
+                </div>
+                <div class="question-style">
+                    <input type="radio" name="matrix" value="4" onclick="check()">${questions[i].option4}</input>
+                </div>
+            </div> 
+        `;
+        questionContent.classList.add("question-content", "hide", `${i}`);
+        questionCntr.appendChild(questionContent);
+        hiddenQuestionsCounter++
+        if (hiddenQuestionsCounter === 1) {
             questionContent.classList.add("q-active");
-            questionCntr.appendChild(questionContent);
-            if (currentQuestion) {
-                let questionContents = document.querySelectorAll('.question-content');
-                for (let i = 0; i < questionContents.length - 1; i++) {
-                    questionContents[i].classList.remove("q-active");
-                }
-            } else {
-                let questionContents = document.querySelectorAll('.question-content');
-                for (let i = 0; i < questionContents.length; i++) {
-                    if(!i) {
-                        questionContents[i].classList.add("q-active");
-                    } else {
-                        questionContents[i].classList.remove("q-active");
-                    }
-                }
-            }
         }
     });
+    const hiddenQuestions = document.querySelectorAll(".hide");
+}
+
+//function to show current question 
+function showQuestion() {
+    let questionContents = document.querySelectorAll('.question-content');
+    for (let question of questionContents) {
+        question.classList.remove("q-active");
+    }
+    // if first question
+    if (!currentQuestion) {
+        questionContents[0].classList.add("q-active");
+    } else {
+        for (let i = 1; i < questionContents.length; i++) {
+            if (i == currentQuestion) {
+                questionContents[i].classList.add("q-active");
+            }
+        }
+    }
 }
 
 //function to show correct question on load
 window.addEventListener('load', () => {
     if (!currentQuestion) {
-        showQuestion();
+        createQuestions();
     }
 });
 
@@ -207,14 +214,11 @@ function next() {
     if (selectedOption.value == questions[currentQuestion].answer) {
         answerContainer.push(selectedOption);
         score++
-        console.log(score)
     }
     currentQuestion++
-    //check if on first question
+    //check if on first question for back button
     if (currentQuestion) {
         backButton.classList.add("active");
-    } else {
-        backButton.classList.remove("active");
     }
     showQuestion();
 }
@@ -222,6 +226,10 @@ function next() {
 //function to go to previus question 
 function back() {
     currentQuestion--
+     //check if on first question for back button
+     if (!currentQuestion) {
+         backButton.classList.remove("active");
+     }
     showQuestion();
 }
 
