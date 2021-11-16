@@ -119,6 +119,13 @@ button {
     background-color: #4caf50;
 }
 
+.permanent-active {
+    pointer-events: auto; 
+    cursor: pointer;
+    opacity: 1; 
+    background-color: #4caf50;
+}
+
 
 .btn {
     display: flex;

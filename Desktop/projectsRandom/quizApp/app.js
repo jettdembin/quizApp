@@ -4,13 +4,13 @@
 let currentQuestion = 0;
 let score = 0;
 const totalQuestionCount = questions.length;
+let answerContainer = [];
 
 
 //Selecting all containers to input data into
 const container = document.querySelector(".container");
 const resultsCntr = document.querySelector(".results-cntr");
 const questionCntr = document.querySelector(".question-cntr");
-const questionNumber = document.querySelector("#question-number");
 const question = document.querySelector("#question");
 const btnCntr = document.querySelector(".btn");
 const nextButton = document.querySelector(".next-btn");
@@ -69,26 +69,95 @@ function showQuestion() {
     }
 }
 
-//function to show correct question on load
-window.addEventListener('load', () => {
-    createQuestions();
-    currentInputs();
-});
+//function to add event listener to only inputs shown 
+function currentInputs() {
+    const inputs = document.querySelectorAll("input");
+    for (let i = 0; i < questions.length; i++) {
+        let j = (3 * i) + i;
+        if (currentQuestion == i) {
+            let questionInputs = ([...([...inputs].slice(j, j + 4))]);
+            questionInputs.forEach(input => {
+                input.addEventListener("click", (e) => {
+                    let object = {
+                        name: this.name,
+                        value: this.value
+                    };
+                    object.name = `${e.target.name}`;
+                    object.value = `${e.target.value}`;
+                    // console.log(object)
+                    answerContainer.push(object)
+                    if (e.target) {
+                        nextButton.classList.add("active");
+                        if (currentQuestion == questions.length -1) {
+                            nextButton.classList.add("permanent-active");
+                        }
+                    }
+                });
+            })
+        };
+    }
+}
+
+//funciton to check value to allow to contine
+function check() {
+    nextButton.classList.add("active");
+}
 
 //function to listen for submission on question answer and to continue to next question
 function next() {
     nextButton.classList.remove("active");
-    if (currentQuestion + 1 == totalQuestionCount) {
-        results();
-        return
+    // check whether to change text content of next button
+    if (currentQuestion == totalQuestionCount - 2) {
+        nextButton.textContent = "Submit >";
     }
     currentQuestion++
+    console.log(currentQuestion)
+    if (currentQuestion == totalQuestionCount) {
+        results();
+        //function to check if on final question to change buttons and allow for submit and retake
+        return
+    }
     currentInputs();
+
     //check if on first question for back button
     if (currentQuestion) {
         backButton.classList.add("active");
     }
     showQuestion();
+}
+
+
+//function to go to previus question 
+function back() {
+    currentQuestion--
+     //check if on first question for back button
+     if (!currentQuestion) {
+         backButton.classList.remove("active");
+     }
+    showQuestion();
+}
+
+//function for backbutton event on retry 
+function backButtonRetry() {
+    backButton.addEventListener("click", () => {
+        backButton.textContent = "< Back";
+        currentQuestion = 0;
+        score = 0;
+        answerContainer = [];
+        container.style.cssText = "opacity: 1";
+        resultsCntr.style.display = "none";
+        resultsCntr.innerHTML = ``;
+        showQuestion();
+        inputs.checked = false;
+        currentInputs();
+        backButton.removeEventListener("click", backButtonRetry);
+        backButton.classList.remove("active");
+    });
+}
+
+//function to clear all containers and restart quiz
+function retry() {
+    backButtonRetry();
 }
 
 function results() { 
@@ -116,47 +185,17 @@ function results() {
     resultsCntr.innerHTML = `
         <div>You scored a ${score} out of ${questions.length}</div>
     `;
+    nextButton.style.cssText = "opacity: 0.4; pointer-events: none;"
+    backButton.textContent = "< Retry";
+    retry();
 }
 
-//function to go to previus question 
-function back() {
-    currentQuestion--
-     //check if on first question for back button
-     if (!currentQuestion) {
-         backButton.classList.remove("active");
-     }
-    showQuestion();
-}
 
-let answerContainer = [];
-
-//funciton to check value to allow to contine
-function check() {
-    nextButton.classList.add("active");
-}
-
-//function to add event listener to only inputs shown 
-function currentInputs() {
-    const inputs = document.querySelectorAll("input");
-    for (let i = 0; i < questions.length; i++) {
-        let j = (3 * i) + i;
-        if (currentQuestion == i) {
-            let questionInputs = ([...([...inputs].slice(j, j + 4))]);
-            questionInputs.forEach(input => {
-                input.addEventListener("click", (e) => {
-                    let object = {
-                        name: this.name,
-                        value: this.value
-                    };
-                    object.name = `${e.target.name}`;
-                    object.value = `${e.target.value}`;
-                    // console.log(object)
-                    answerContainer.push(object)
-                });
-            })
-        };
-    }
-}
+//function to show correct question on load
+window.addEventListener('load', () => {
+    createQuestions();
+    currentInputs();
+});
 
 
 
