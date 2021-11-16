@@ -134,7 +134,7 @@
 let currentQuestion = 0;
 let answerContainer = [];
 const totalQuestionCount = questions.length;
-let score= 0;
+let score = 0;
 
 
 //Selecting all containers to input data into
@@ -157,16 +157,16 @@ function createQuestions() {
             
             <div class="question-options">
                 <div class="question-style">
-                    <input type="radio" name="${i}" value="1" onclick="check()">${questions[i].option1}</input><br />
+                    <input type="radio" name="group${i}" value="1"  data-group="${i}" onclick="check()">${questions[i].option1}</input><br />
                 </div>
                 <div class="question-style">
-                    <input type="radio" name="${i}" value="2" onclick="check()">${questions[i].option2}</input><br />
+                    <input type="radio" name="group${i}" value="2" onclick="check()">${questions[i].option2}</input><br />
                 </div>
                     <div class="question-style">
-                    <input type="radio" name="${i}" value="3" onclick="check()">${questions[i].option3}</input><br />
+                    <input type="radio" name="group${i}" value="3" onclick="check()">${questions[i].option3}</input><br />
                 </div>
                 <div class="question-style">
-                    <input type="radio" name="${i}" value="4" onclick="check()">${questions[i].option4}</input>
+                    <input type="radio" name="group${i}" value="4" onclick="check()">${questions[i].option4}</input>
                 </div>
             </div> 
         `;
@@ -177,7 +177,6 @@ function createQuestions() {
             questionContent.classList.add("q-active");
         }
     });
-    const hiddenQuestions = document.querySelectorAll(".hide");
 }
 
 //function to show current question 
@@ -200,20 +199,30 @@ function showQuestion() {
 
 //function to show correct question on load
 window.addEventListener('load', () => {
-    if (!currentQuestion) {
-        createQuestions();
-    }
+    createQuestions();
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.addEventListener("click", (e) => {
+            if (e.target.value == questions[currentQuestion].answer) {
+                answerContainer.push(e.target.nextSibling.textContent.trim());
+                for (let answer of answerContainer) {
+                    console.log(e.target.name)
+                    // if (e.target.name == answer.name) {
+                    //     answer.replace(answer.name);
+                    // }
+                }
+            }
+        })
+    });
 });
-
 
 
 //function to listen for submission on question answer and to continue to next question
 function next() {
     nextButton.classList.remove("active");
-    const selectedOption = document.querySelector('input[type=radio]:checked');
-    if (selectedOption.value == questions[currentQuestion].answer) {
-        answerContainer.push(selectedOption);
-        score++
+    if (currentQuestion + 1 == totalQuestionCount) {
+        results();
+        return
     }
     currentQuestion++
     //check if on first question for back button
@@ -221,6 +230,10 @@ function next() {
         backButton.classList.add("active");
     }
     showQuestion();
+}
+
+function results() {
+    console.log(Array.from(new Set(answerContainer)));
 }
 
 //function to go to previus question 
@@ -233,14 +246,17 @@ function back() {
     showQuestion();
 }
 
+
+
 //funciton to check value to allow to contine
 function check() {
     nextButton.classList.add("active");
-    const selectedOption = document.querySelector('input[type=radio]:checked');
-    if (selectedOption.value == answerContainer[-1]) {
-        score--
-    }
+    // if (selectedOption.value == questions[currentQuestion].answer) {
+    //     answerContainer.push(selectedOption.nextSibling.textContent);
+    //     console.log(answerContainer);
+    // }
 }
+
 
 
 

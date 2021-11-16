@@ -61,15 +61,13 @@ input[type="radio"] {
 }
 
 .hide {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    top: 100%;
+    display: none;
+    pointer-events: none;
 }
 
 .q-active {
-    position: absolute;
-    top: 0;
+    display: block;
+    pointer-events: auto;
 }
 
 button {
@@ -102,9 +100,6 @@ button {
     background-color: #4caf50;
 }
 
-.opacity {
-    opacity: 1;
-}
 
 .btn {
     display: flex;
