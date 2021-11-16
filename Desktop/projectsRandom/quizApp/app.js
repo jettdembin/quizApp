@@ -132,7 +132,6 @@
 
 //Array of correct scores by user
 let currentQuestion = 0;
-let answerContainer = [];
 const totalQuestionCount = questions.length;
 let score = 0;
 
@@ -157,7 +156,7 @@ function createQuestions() {
             
             <div class="question-options">
                 <div class="question-style">
-                    <input type="radio" name="group${i}" value="1"  data-group="${i}" onclick="check()">${questions[i].option1}</input><br />
+                    <input type="radio" name="group${i}" value="1" onclick="check()">${questions[i].option1}</input><br />
                 </div>
                 <div class="question-style">
                     <input type="radio" name="group${i}" value="2" onclick="check()">${questions[i].option2}</input><br />
@@ -200,22 +199,8 @@ function showQuestion() {
 //function to show correct question on load
 window.addEventListener('load', () => {
     createQuestions();
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach(input => {
-        input.addEventListener("click", (e) => {
-            if (e.target.value == questions[currentQuestion].answer) {
-                answerContainer.push(e.target.nextSibling.textContent.trim());
-                for (let answer of answerContainer) {
-                    console.log(e.target.name)
-                    // if (e.target.name == answer.name) {
-                    //     answer.replace(answer.name);
-                    // }
-                }
-            }
-        })
-    });
+    currentInputs();
 });
-
 
 //function to listen for submission on question answer and to continue to next question
 function next() {
@@ -225,6 +210,7 @@ function next() {
         return
     }
     currentQuestion++
+    currentInputs();
     //check if on first question for back button
     if (currentQuestion) {
         backButton.classList.add("active");
@@ -233,7 +219,7 @@ function next() {
 }
 
 function results() {
-    console.log(Array.from(new Set(answerContainer)));
+    // console.log(Array.from(new Set(answerContainer)));
 }
 
 //function to go to previus question 
@@ -246,15 +232,28 @@ function back() {
     showQuestion();
 }
 
-
+let answerContainer = [];
 
 //funciton to check value to allow to contine
 function check() {
     nextButton.classList.add("active");
-    // if (selectedOption.value == questions[currentQuestion].answer) {
-    //     answerContainer.push(selectedOption.nextSibling.textContent);
-    //     console.log(answerContainer);
-    // }
+}
+
+//function to add event listener to only inputs shown 
+function currentInputs() {
+    const inputs = document.querySelectorAll("input");
+    for (let i = 0; i < questions.length; i++) {
+        let j = (3 * i) + i;
+        if (currentQuestion == i) {
+            let questionInputs = ([...([...inputs].slice(j, j + 4))]);
+            console.log(questionInputs)
+            questionInputs.forEach(input => {
+                input.addEventListener("click", () => {
+                    console.log(input)
+                })
+            })
+        };
+    }
 }
 
 

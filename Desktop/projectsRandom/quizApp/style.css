@@ -63,10 +63,12 @@ input[type="radio"] {
 .hide {
     display: none;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .q-active {
     display: block;
+    visibility: visible;
     pointer-events: auto;
 }
 
