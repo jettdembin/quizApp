@@ -105,13 +105,15 @@ function check() {
 
 //function to listen for submission on question answer and to continue to next question
 function next() {
-    nextButton.classList.remove("active");
     // check whether to change text content of next button
     if (currentQuestion == totalQuestionCount - 2) {
+        nextButton.classList.remove("active");
         nextButton.textContent = "Submit >";
+    } else {
+        nextButton.textContent = "Next >";
+        nextButton.classList.remove("active");
     }
     currentQuestion++
-    console.log(currentQuestion)
     if (currentQuestion == totalQuestionCount) {
         results();
         //function to check if on final question to change buttons and allow for submit and retake
@@ -133,6 +135,9 @@ function back() {
      //check if on first question for back button
      if (!currentQuestion) {
          backButton.classList.remove("active");
+     } 
+     if (currentQuestion) {
+        nextButton.textContent = "Next >";
      }
     showQuestion();
 }
@@ -148,10 +153,14 @@ function backButtonRetry() {
         resultsCntr.style.display = "none";
         resultsCntr.innerHTML = ``;
         showQuestion();
-        inputs.checked = false;
         currentInputs();
+        const inputsChecked = document.querySelectorAll("input[type=radio]:checked")
+        inputsChecked.forEach(input => {
+            input.checked = false;
+        });
         backButton.removeEventListener("click", backButtonRetry);
         backButton.classList.remove("active");
+        nextButton.classList.remove("permanent-active");
     });
 }
 
@@ -185,7 +194,7 @@ function results() {
     resultsCntr.innerHTML = `
         <div>You scored a ${score} out of ${questions.length}</div>
     `;
-    nextButton.style.cssText = "opacity: 0.4; pointer-events: none;"
+    nextButton.classList.remove("permanent-active");
     backButton.textContent = "< Retry";
     retry();
 }
