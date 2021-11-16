@@ -1,144 +1,18 @@
-// var currentQuestion = 0;
-// //array of correct scores by user
-// var scoreContainer = [];
-// var totalQuestionCount = questions.length;
-// var score= 0;
-
-// var btn1 = document.getElementById('btn1');
-// var btn2 = document.getElementById('btn2');
-// var btn3 = document.getElementById('btn3');
-// var back1 = document.getElementById('back-1');
-// var back2 = document.getElementById('back-2');
-// var question1 = document.getElementById("question-cntr1")
-// var question2 = document.getElementById("question-cntr2");
-// var question3 = document.getElementById("question-cntr3");
-
-// //function to add up scoreContainer total correct
-// var scoreCount = () => {
-//     for (let i = 0; i < scoreContainer.length; i++) {
-//         score++
-//     }
-// };
-
-// //function onclick for button one to change to next question
-// btn1.addEventListener('click', function() {
-//     next();
-//     totalScore();
-// });
-
-// //function onclick for button one to change to next question
-// btn2.addEventListener('click', function() {
-//     totalScore();
-//     btn3.textContent = "Submit";
-// });
-
-// btn3.addEventListener('click', function() {
-//     totalScore();
-//     scoreCount();
-//     document.getElementById("container").style.cssText = "opacity:.4";
-//     document.getElementById("heading").style.cssText = "text-align:center";
-//     document.getElementById('result').style.cssText = "display:block";
-//     document.getElementById("scored").textContent = score;
-// });
-
-// back1.addEventListener('click', function() {
-//     previousQuestion();
-//     //reduce question count
-//     currentQuestion--;
-//     //take previous answer out of score array
-//     scoreContainer.pop();
-// });
-// back2.addEventListener('click', function() {
-//     previousQuestion();
-//     //reduce question count
-//     currentQuestion--;
-//     //take previous answer out of score array
-//     //if final question
-//     /*
-//     if (currentQuestion === totalQuestionCount) {
-
-//     }
-//     */
-// });
-
-
-// //function
-// function totalScore() {
-//     var selectedOption = document.querySelector('input[type=radio]:checked');
-//     var answer = selectedOption.value;
-//     if (questions[currentQuestion].answer == answer) {
-//         scoreContainer.push(questions[currentQuestion].answer);
-//     }
-//     setNewActive();
-//     selectedOption.checked = false;
-//     currentQuestion++;
-//     if (currentQuestion === totalQuestionCount) {
-//         document.getElementById("container").style.cssText = "opacity:.4";
-//         document.getElementById("heading").style.cssText = "text-align:center";
-//         document.getElementById('result').style.cssText = "display:block";
-//         document.getElementById("scored").textContent = score;
-//     }
-// };
-
-// function next() {
-//     var selectedOption = document.querySelector('input[type=radio]:checked');
-//     if (!selectedOption) {
-//         alert("Please select an answer before proceeding");
-//         return
-//     } 
-//     if (selectedOption) {
-//         return btn1.classList.add('opacity');
-//     }
-// }
-
-
-// function previousQuestion() {
-//     var hiddenQuestions = document.getElementsByClassName('hide');
-//     for (var hiddenQuestion of hiddenQuestions) {
-//         hiddenQuestion.classList.remove('q-active');
-//     }
-//     if (currentQuestion == 1) {
-//         question1.classList.add('q-active');
-//         btn1.classList.add('q-active');
-//     }
-//     if (currentQuestion == 2) {
-//         question2.classList.add('q-active');
-//         back1.classList.add('q-active');
-//         btn2.classList.add('q-active');
-//     }
-// };
-
-// // funciton to remove q-active from all hide classes and set q-active on active quesiton
-
-// function setNewActive() {
-//     var hiddenQuestions = document.getElementsByClassName('hide');
-//     for (var hiddenQuestion of hiddenQuestions) {
-//         hiddenQuestion.classList.remove('q-active');
-//     }
-//         // set q-active on active quesiton
-//     if (currentQuestion == 0) {
-//         question2.classList.add('q-active');
-//         btn2.classList.add('q-active');
-//         back1.classList.add('q-active');
-//     }
-//     if (currentQuestion == 1) {
-//         question3.classList.add('q-active');
-//         btn3.classList.add('q-active');
-//         back2.classList.add('q-active');
-//     }
-// };
-
 //Making code dynamic to prevent reused code
 
 //Array of correct scores by user
 let currentQuestion = 0;
+let score = 0;
 const totalQuestionCount = questions.length;
 
 
 //Selecting all containers to input data into
+const container = document.querySelector(".container");
+const resultsCntr = document.querySelector(".results-cntr");
 const questionCntr = document.querySelector(".question-cntr");
 const questionNumber = document.querySelector("#question-number");
 const question = document.querySelector("#question");
+const btnCntr = document.querySelector(".btn");
 const nextButton = document.querySelector(".next-btn");
 const backButton = document.querySelector(".back-btn");
 let hiddenQuestionsCounter = 0;
@@ -220,15 +94,28 @@ function next() {
 function results() { 
     //function to remove duplicates with same property
     function removeDuplicatesBy(keyFn, array) {
-        var mySet = new Set();
+        const mySet = new Set();
         return array.filter(function(x) {
-            var key = keyFn(x), isNew = !mySet.has(key);
+            const key = keyFn(x), isNew = !mySet.has(key);
             if (isNew) mySet.add(key);
-            return isNew;
+            return isNew
         });
     }
-    const withoutDuplicates = removeDuplicatesBy(x => x.name, answerContainer);
-    console.log(withoutDuplicates.length)
+    //reverse container to only count most recent checked radio
+    const withoutDuplicates = removeDuplicatesBy(x => x.name, answerContainer.reverse());
+    const finalContainer = withoutDuplicates.reverse();
+    for (let i = 0; i < finalContainer.length; i++) {
+        if (finalContainer[i].value == questions[i].answer) {
+            score++
+        }
+    }
+
+    //darken quiz and show results
+    container.style.cssText = "opacity: 0.4";
+    resultsCntr.style.display = "flex";
+    resultsCntr.innerHTML = `
+        <div>You scored a ${score} out of ${questions.length}</div>
+    `;
 }
 
 //function to go to previus question 
@@ -255,7 +142,6 @@ function currentInputs() {
         let j = (3 * i) + i;
         if (currentQuestion == i) {
             let questionInputs = ([...([...inputs].slice(j, j + 4))]);
-            console.log(questionInputs)
             questionInputs.forEach(input => {
                 input.addEventListener("click", (e) => {
                     let object = {
@@ -265,11 +151,7 @@ function currentInputs() {
                     object.name = `${e.target.name}`;
                     object.value = `${e.target.value}`;
                     // console.log(object)
-                    //condition to check if answer is correct
-                    if (questions[currentQuestion].answer == e.target.value) {
-                        answerContainer.push(object)
-                    }
-                    // console.log(answerContainer)
+                    answerContainer.push(object)
                 });
             })
         };
