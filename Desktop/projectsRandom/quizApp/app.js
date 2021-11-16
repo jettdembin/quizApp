@@ -133,7 +133,6 @@
 //Array of correct scores by user
 let currentQuestion = 0;
 const totalQuestionCount = questions.length;
-let score = 0;
 
 
 //Selecting all containers to input data into
@@ -218,8 +217,18 @@ function next() {
     showQuestion();
 }
 
-function results() {
-    // console.log(Array.from(new Set(answerContainer)));
+function results() { 
+    //function to remove duplicates with same property
+    function removeDuplicatesBy(keyFn, array) {
+        var mySet = new Set();
+        return array.filter(function(x) {
+            var key = keyFn(x), isNew = !mySet.has(key);
+            if (isNew) mySet.add(key);
+            return isNew;
+        });
+    }
+    const withoutDuplicates = removeDuplicatesBy(x => x.name, answerContainer);
+    console.log(withoutDuplicates.length)
 }
 
 //function to go to previus question 
@@ -248,9 +257,20 @@ function currentInputs() {
             let questionInputs = ([...([...inputs].slice(j, j + 4))]);
             console.log(questionInputs)
             questionInputs.forEach(input => {
-                input.addEventListener("click", () => {
-                    console.log(input)
-                })
+                input.addEventListener("click", (e) => {
+                    let object = {
+                        name: this.name,
+                        value: this.value
+                    };
+                    object.name = `${e.target.name}`;
+                    object.value = `${e.target.value}`;
+                    // console.log(object)
+                    //condition to check if answer is correct
+                    if (questions[currentQuestion].answer == e.target.value) {
+                        answerContainer.push(object)
+                    }
+                    // console.log(answerContainer)
+                });
             })
         };
     }
