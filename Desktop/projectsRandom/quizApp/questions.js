@@ -19,6 +19,13 @@ const questions = [{
     "option3" : "They need to know web development, the platform itself, and the liquid template language",
     "option4" : "All the above",
     "answer" : "4"
+}, {
+    "question" : "Which of the following is true about Wordpress?",
+    "option1" : "They are paid extremely well",
+    "option2" : "There is a high demand for them",
+    "option3" : "They need to know web development, the platform itself, and the liquid template language",
+    "option4" : "All the above",
+    "answer" : "4"
 }];
 
 /*if (!selectedOption) {

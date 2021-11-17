@@ -2,6 +2,8 @@
 
 //Array of correct scores by user
 let currentQuestion = 0;
+let highestQuestion = 0;
+let highestQuestionHolder = [];
 let score = 0;
 const totalQuestionCount = questions.length;
 let answerContainer = [];
@@ -100,7 +102,14 @@ function currentInputs() {
 
 //funciton to check value to allow to contine
 function check() {
-    nextButton.classList.add("active");
+    highestQ();
+    console.log(highestQuestion)
+    if (currentQuestion + 2 == highestQuestion || !currentQuestion) {
+        nextButton.classList.add("permanent-active");
+    } else {
+        nextButton.classList.add("active");
+        nextButton.classList.remove("permanent-active");
+    }
 }
 
 //function to listen for submission on question answer and to continue to next question
@@ -108,6 +117,7 @@ function next() {
     // check whether to change text content of next button
     if (currentQuestion == totalQuestionCount - 2) {
         nextButton.classList.remove("active");
+        nextButton.classList.add("permanent-active");
         nextButton.textContent = "Submit >";
     } else {
         nextButton.textContent = "Next >";
@@ -128,9 +138,20 @@ function next() {
     showQuestion();
 }
 
+//function to check highest question
+ function highestQ() {
+    if (highestQuestionHolder.length == currentQuestion) {
+        highestQuestionHolder.push(++highestQuestion);
+        console.log(highestQuestionHolder, highestQuestion);
+    };
+ } 
 
 //function to go to previus question 
 function back() {
+    // if (highestQuestionHolder.length + 1 == currentQuestion) {
+    //     highestQuestionHolder.push(++highestQuestion);
+    //     console.log(highestQuestionHolder, highestQuestion);
+    // };
     currentQuestion--
      //check if on first question for back button
      if (!currentQuestion) {
