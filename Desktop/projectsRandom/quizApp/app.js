@@ -142,26 +142,29 @@ function back() {
     showQuestion();
 }
 
+// event listener for retry on back button
+function restart() {
+    backButton.textContent = "< Back";
+    currentQuestion = 0;
+    score = 0;
+    answerContainer = [];
+    container.style.cssText = "opacity: 1";
+    resultsCntr.style.display = "none";
+    resultsCntr.innerHTML = ``;
+    showQuestion();
+    currentInputs();
+    const inputsChecked = document.querySelectorAll("input[type=radio]:checked")
+    inputsChecked.forEach(input => {
+        input.checked = false;
+    });
+    backButton.classList.remove("active");
+    nextButton.classList.remove("permanent-active");
+    backButton.removeEventListener("click", restart, false);
+};
+
 //function for backbutton event on retry 
 function backButtonRetry() {
-    backButton.addEventListener("click", () => {
-        backButton.textContent = "< Back";
-        currentQuestion = 0;
-        score = 0;
-        answerContainer = [];
-        container.style.cssText = "opacity: 1";
-        resultsCntr.style.display = "none";
-        resultsCntr.innerHTML = ``;
-        showQuestion();
-        currentInputs();
-        const inputsChecked = document.querySelectorAll("input[type=radio]:checked")
-        inputsChecked.forEach(input => {
-            input.checked = false;
-        });
-        backButton.removeEventListener("click", backButtonRetry);
-        backButton.classList.remove("active");
-        nextButton.classList.remove("permanent-active");
-    });
+    backButton.addEventListener("click", restart);
 }
 
 //function to clear all containers and restart quiz
@@ -204,6 +207,8 @@ function results() {
 window.addEventListener('load', () => {
     createQuestions();
     currentInputs();
+    backButton.addEventListener("click", back);
+    nextButton.addEventListener("click", next);
 });
 
 
