@@ -87,13 +87,7 @@ function currentInputs() {
                     object.name = `${e.target.name}`;
                     object.value = `${e.target.value}`;
                     // console.log(object)
-                    answerContainer.push(object)
-                    if (e.target) {
-                        nextButton.classList.add("active");
-                        if (currentQuestion == questions.length -1) {
-                            nextButton.classList.add("permanent-active");
-                        }
-                    }
+                    answerContainer.push(object);
                 });
             })
         };
@@ -104,11 +98,11 @@ function currentInputs() {
 function check() {
     highestQ();
     console.log(highestQuestion)
-    if (currentQuestion + 2 == highestQuestion || !currentQuestion) {
+    // check if answered final question 
+    if (highestQuestion == totalQuestionCount) {
         nextButton.classList.add("permanent-active");
     } else {
         nextButton.classList.add("active");
-        nextButton.classList.remove("permanent-active");
     }
 }
 
@@ -116,9 +110,12 @@ function check() {
 function next() {
     // check whether to change text content of next button
     if (currentQuestion == totalQuestionCount - 2) {
+        nextButton.classList.remove("back-active");
         nextButton.classList.remove("active");
-        nextButton.classList.add("permanent-active");
         nextButton.textContent = "Submit >";
+    } else if (currentQuestion + 1 == highestQuestion) {
+        nextButton.classList.remove("active");
+        nextButton.classList.remove("back-active");
     } else {
         nextButton.textContent = "Next >";
         nextButton.classList.remove("active");
@@ -148,10 +145,7 @@ function next() {
 
 //function to go to previus question 
 function back() {
-    // if (highestQuestionHolder.length + 1 == currentQuestion) {
-    //     highestQuestionHolder.push(++highestQuestion);
-    //     console.log(highestQuestionHolder, highestQuestion);
-    // };
+    nextButton.classList.add("back-active");
     currentQuestion--
      //check if on first question for back button
      if (!currentQuestion) {
@@ -166,8 +160,10 @@ function back() {
 // event listener for retry on back button
 function restart() {
     backButton.textContent = "< Back";
+    highestQuestion = 0;
     currentQuestion = 0;
     score = 0;
+    highestQuestionHolder = [];
     answerContainer = [];
     container.style.cssText = "opacity: 1";
     resultsCntr.style.display = "none";
