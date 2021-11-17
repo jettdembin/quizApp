@@ -21,21 +21,22 @@ const questions = [{
     "answer" : "4"
 }, {
     "question" : "Which of the following is true about Wordpress?",
-    "option1" : "They are paid extremely well",
-    "option2" : "There is a high demand for them",
-    "option3" : "They need to know web development, the platform itself, and the liquid template language",
+    "option1" : "It is another platform like Shopify",
+    "option2" : "There is a low demand for them",
+    "option3" : "They do not need to know web development, the platform itself, and the liquid template language",
     "option4" : "All the above",
-    "answer" : "4"
+    "answer" : "1"
 }];
 
-/*if (!selectedOption) {
-        alert("Please select an answer before proceeding");
-        return
+//function to shuffle questions before start of quiz
+function randomArrayShuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
     }
-    */
-   //changing to greyed out next button instead of alert
-    /*if (!selectedOption) {
-        nxtBtns.style.cssText = "pointer-events:none;";
-    } else {
-        nxtBtns.style.cssText = "pointer-events:auto;"
-}*/
+    return array;
+}

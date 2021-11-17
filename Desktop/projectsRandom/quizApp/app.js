@@ -23,6 +23,9 @@ let hiddenQuestions = document.querySelectorAll(".hide");
 
 //Creating Container for questions and answers to go into
 function createQuestions() {
+    while (questionCntr.firstChild) {
+        questionCntr.removeChild(questionCntr.firstChild);
+    }
     questions.forEach((question, i) => {
         const questionContent = document.createElement('div');
         questionContent.innerHTML = `
@@ -168,6 +171,8 @@ function restart() {
     container.style.cssText = "opacity: 1";
     resultsCntr.style.display = "none";
     resultsCntr.innerHTML = ``;
+    randomArrayShuffle(questions);
+    createQuestions();
     showQuestion();
     currentInputs();
     const inputsChecked = document.querySelectorAll("input[type=radio]:checked")
@@ -222,6 +227,7 @@ function results() {
 
 //function to show correct question on load
 window.addEventListener('load', () => {
+    randomArrayShuffle(questions);
     createQuestions();
     currentInputs();
     backButton.addEventListener("click", back);
