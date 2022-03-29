@@ -1,6 +1,4 @@
-# NO NEED TO SEE TOP DIRECTORY
-
-Quiz Application
+# Quiz Application
 
 This is quiz application that demonstrates the use of dynamic programming.
 
