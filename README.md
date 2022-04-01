@@ -9,3 +9,6 @@ User can check an answer, go back, and also retry quiz.
 User may not advance to the next question until an answer is selected.
 
 The application is not intended for mobile use at this time.
+
+## Technologies Used
+HTML5 | CSS3 | Vanilla Javascript
